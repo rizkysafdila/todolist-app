@@ -52,7 +52,7 @@ async function deleteItem(itemId: number) {
   <div class="p-6">
     <div class="flex justify-between items-center mb-4">
       <div class="flex items-center gap-2">
-        <UButton icon="lucide:chevron-left" variant="ghost" @click="$router.back()" />
+        <UButton icon="lucide:chevron-left" variant="ghost" @click="navigateTo('/checklists')" />
         <h2 class="text-2xl font-bold">
           {{ checklist?.name }}
         </h2>
