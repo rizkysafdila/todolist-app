@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <script setup lang="ts">
 const toast = useToast()
 const checklistStore = useChecklistStore()
@@ -41,29 +42,12 @@ async function deleteChecklist(id: number) {
     </div>
 
     <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <UCard
+      <ChecklistCard
         v-for="checklist in checklists"
         :key="checklist.id"
-        class="cursor-pointer hover:shadow-md transition"
-      >
-        <template #header>
-          <div class="flex justify-between items-center">
-            <NuxtLink
-              :to="`/checklists/${checklist.id}`"
-              class="font-semibold text-lg hover:underline"
-            >
-              {{ checklist.name }}
-            </NuxtLink>
-            <UButton
-              color="error"
-              variant="soft"
-              size="xs"
-              icon="i-heroicons-trash"
-              @click="deleteChecklist(checklist.id)"
-            />
-          </div>
-        </template>
-      </UCard>
+        :data="checklist"
+        @delete="(id) => deleteChecklist(id)"
+      />
     </div>
   </div>
 </template>

@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <script setup lang="ts">
 const route = useRoute()
 const checklistId = computed(() => Number(route.params.id))
@@ -50,9 +51,12 @@ async function deleteItem(itemId: number) {
 <template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">
-        {{ checklist?.name }}
-      </h2>
+      <div class="flex items-center gap-2">
+        <UButton icon="lucide:chevron-left" variant="ghost" @click="$router.back()" />
+        <h2 class="text-2xl font-bold">
+          {{ checklist?.name }}
+        </h2>
+      </div>
       <UButton icon="i-heroicons-plus" @click="goToAddItem">
         Add Item
       </UButton>
@@ -63,26 +67,15 @@ async function deleteItem(itemId: number) {
     </div>
 
     <div class="space-y-2">
-      <UCard v-for="item in items" :key="item.id" :ui="{ body: 'flex justify-between items-center' }">
-        <div class="flex items-center gap-2">
-          <UCheckbox v-model="item.itemCompletionStatus" :label="item.name" :ui="{ label: item.itemCompletionStatus && 'line-through' }" @change="toggleItem(item.id)" />
-        </div>
-        <div class="flex items-center gap-2">
-          <UButton
-            icon="i-heroicons-pencil"
-            size="xs"
-            variant="ghost"
-            @click="editItem(item.id, item.name)"
-          />
-          <UButton
-            icon="i-heroicons-trash"
-            size="xs"
-            variant="ghost"
-            color="error"
-            @click="deleteItem(item.id)"
-          />
-        </div>
-      </UCard>
+      <ChecklistItem
+        v-for="item in items"
+        :key="item.id"
+        v-model="item.itemCompletionStatus"
+        :item="item"
+        @toggle="toggleItem(item.id)"
+        @edit="editItem(item.id, item.name)"
+        @delete="deleteItem(item.id)"
+      />
     </div>
   </div>
 </template>

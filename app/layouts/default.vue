@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-function handleLogout() {
-  const token = useCookie('token')
-  token.value = null
+const authStore = useAuthStore()
+const { logout } = authStore
+const { token } = storeToRefs(authStore)
 
-  if (!token.value) {
+function handleLogout() {
+  logout()
+  if (!token.value)
     navigateTo('/login')
-  }
 }
 </script>
 
