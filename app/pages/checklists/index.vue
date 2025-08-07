@@ -43,13 +43,13 @@ async function deleteChecklist(id: number) {
     <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <UCard
         v-for="checklist in checklists"
-        :key="checklist.id" 
+        :key="checklist.id"
         class="cursor-pointer hover:shadow-md transition"
       >
         <template #header>
           <div class="flex justify-between items-center">
             <NuxtLink
-              :to="`/checklists/${checklist.id}`" 
+              :to="`/checklists/${checklist.id}`"
               class="font-semibold text-lg hover:underline"
             >
               {{ checklist.name }}
