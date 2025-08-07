@@ -5,7 +5,7 @@ const { fetchAll, create, remove } = checklistStore
 const { checklists } = storeToRefs(checklistStore)
 
 await useAsyncData(
-  'checklists',
+  'all-checklists',
   () => fetchAll(),
 )
 
